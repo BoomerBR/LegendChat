@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+group 'br.com.devpaulo.legendchat'
+version '1.13'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(dir: 'lib', include: '*.jar')
+}
