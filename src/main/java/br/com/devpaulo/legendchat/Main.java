@@ -56,8 +56,8 @@ public class Main extends JavaPlugin implements PluginMessageListener {
 		else
 			getServer().getPluginManager().registerEvents(new Listeners_old(), this);
 		
-		getServer().getMessenger().registerOutgoingPluginChannel(this, ":legendchat");
-        getServer().getMessenger().registerIncomingPluginChannel(this, ":legendchat", this);
+		getServer().getMessenger().registerOutgoingPluginChannel(this, "agnc:agnc");
+        getServer().getMessenger().registerIncomingPluginChannel(this, "agnc:agnc", this);
 		
 		boolean check_update = true;
 		if(getConfig().contains("check_for_updates"))

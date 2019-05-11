@@ -79,8 +79,16 @@ public class Updater {
 	private boolean updConfig = false;
 	private Plugin plugin = Bukkit.getPluginManager().getPlugin("Legendchat");
 	public boolean updateConfig() {
-		InputStreamReader is = new InputStreamReader(plugin.getResource(("config_template.yml").replace('\\', '/')));
-		YamlConfiguration c = YamlConfiguration.loadConfiguration(is);
+		YamlConfiguration c;
+		try {
+			InputStreamReader is = new InputStreamReader(plugin.getResource(("config_template.yml").replace('\\', '/')));
+			c = YamlConfiguration.loadConfiguration(is);
+		}
+		catch(NoSuchMethodError nsme)
+		{
+			InputStream is = plugin.getResource(("config_template.yml").replace('\\', '/'));
+			c = YamlConfiguration.loadConfiguration(is);
+		}
 		for(String n : c.getConfigurationSection("").getKeys(true))
 			if(!has(n))
 				set(n,c.get(n));
@@ -104,10 +112,20 @@ public class Updater {
 		MessageManager m = Legendchat.getMessageManager();
 		m.registerLanguageFile(f);
 		m.loadMessages(f);
-		InputStreamReader is = null;
-		if((is = new InputStreamReader(plugin.getResource(("language"+File.separator+"language_"+language+".yml").replace('\\', '/'))))==null)
-			is=new InputStreamReader(plugin.getResource(("language"+File.separator+"language_en.yml").replace('\\', '/')));
-		YamlConfiguration c = YamlConfiguration.loadConfiguration(is);
+		YamlConfiguration c;
+		try {
+			InputStreamReader is = null;
+			if ((is = new InputStreamReader(plugin.getResource(("language" + File.separator + "language_" + language + ".yml").replace('\\', '/')))) == null)
+				is = new InputStreamReader(plugin.getResource(("language" + File.separator + "language_en.yml").replace('\\', '/')));
+			 c = YamlConfiguration.loadConfiguration(is);
+		} catch (NoSuchMethodError nsme)
+		{
+			InputStream is = null;
+			if ((is = plugin.getResource(("language" + File.separator + "language_" + language + ".yml").replace('\\', '/'))) == null)
+				is = plugin.getResource(("language" + File.separator + "language_en.yml").replace('\\', '/'));
+			c = YamlConfiguration.loadConfiguration(is);
+
+		}
 		for(String n : c.getConfigurationSection("").getKeys(false))
 			if(!m.hasMessage(n))
 				addMessage(m,n,c.getString(n));

@@ -291,7 +291,7 @@ public class ChannelUtils {
 						out.writeUTF(translateAlternateChatColorsWithPermission(sender, message));
 					} catch (IOException e1) {
 					}
-					sender.sendPluginMessage(Bukkit.getPluginManager().getPlugin("Legendchat"), ":legendchat", b.toByteArray());
+					sender.sendPluginMessage(Bukkit.getPluginManager().getPlugin("Legendchat"), "agnc:agnc", b.toByteArray());
 				}
 			}
 		}
