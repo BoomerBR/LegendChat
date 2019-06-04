@@ -80,7 +80,7 @@ public class Updater {
 	private Plugin plugin = Bukkit.getPluginManager().getPlugin("Legendchat");
 	public boolean updateConfig() {
 		InputStream is = plugin.getResource(("config_template.yml").replace('\\', '/'));
-		YamlConfiguration c = YamlConfiguration.loadConfiguration(is);
+                YamlConfiguration c = YamlConfiguration.loadConfiguration(new InputStreamReader(is));
 		for(String n : c.getConfigurationSection("").getKeys(true))
 			if(!has(n))
 				set(n,c.get(n));
